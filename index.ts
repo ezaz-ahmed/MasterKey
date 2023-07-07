@@ -2,15 +2,13 @@ import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import cookieParser from 'cookie-parser'
 import connectDB from './config/db'
-import userRouter from './routes/UserRoutes'
+import userRouter from './routes/userRoutes'
 
 dotenv.config()
 
 const app: Express = express()
 app.use(cookieParser())
 app.use(express.json())
-
-
 
 const port = process.env.PORT
 

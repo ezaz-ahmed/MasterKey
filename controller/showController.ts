@@ -1,8 +1,9 @@
 import { Request, Response } from 'express'
 import Show, { IShow } from '../models/ShowModel'
+import { AuthenticatedRequest } from '../middelware/authMiddleware'
 
 export const createShow = async (
-  req: Request,
+  req: AuthenticatedRequest,
   res: Response
 ): Promise<void> => {
   try {
