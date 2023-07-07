@@ -4,6 +4,7 @@ import { AuthenticatedRequest } from '../middelware/authMiddleware'
 import Actor, { IActor } from '../models/ActorModel'
 import Director, { IDirector } from '../models/DirectorModel'
 import Producer, { IProducer } from '../models/ProducerModel'
+import Review, { IReview } from '../models/ReviewModel'
 
 export const createShow = async (
   req: AuthenticatedRequest,
@@ -17,7 +18,7 @@ export const createShow = async (
       return
     }
 
-    const createdBy = req.user?.id
+    const createdBy = req.user?._id
 
     if (!createdBy) {
       res.status(401).json({ message: 'Unauthorized - User not found' })
@@ -152,6 +153,24 @@ export const deleteShow = async (
     }
 
     res.status(200).json({ message: 'Show deleted successfully' })
+  } catch (error) {
+    res.status(500).json({ message: 'Server Error' })
+  }
+}
+
+export const getReviewsById = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    const showId: string = req.params.showId
+
+    const reviews: IReview[] = await Review.find({ movie: showId })
+      .populate('movie', 'title')
+      .populate('user', 'name')
+
+
+    res.status(200).json(reviews)
   } catch (error) {
     res.status(500).json({ message: 'Server Error' })
   }

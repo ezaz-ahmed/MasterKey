@@ -7,6 +7,7 @@ import actorRouter from './routes/actorRoutes'
 import directorRouter from './routes/directorRoutes'
 import producerRouter from './routes/producerRoutes'
 import showRouter from './routes/showRoutes'
+import reviewRouter from './routes/reviewRoutes'
 
 dotenv.config()
 
@@ -25,6 +26,7 @@ app.use('/api/actors', actorRouter)
 app.use('/api/producers', producerRouter)
 app.use('/api/directors', directorRouter)
 app.use('/api/shows', showRouter)
+app.use('/api/review', reviewRouter)
 
 app.listen(port, async () => {
   const db = await connectDB()

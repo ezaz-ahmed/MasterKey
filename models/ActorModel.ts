@@ -18,8 +18,9 @@ const actorSchema: Schema<IActor> = new mongoose.Schema({
       ref: 'Show',
     },
   ],
-})
+}, { timestamps: true })
 
 const Actor: IActorModel = mongoose.model<IActor, IActorModel>('Actor', actorSchema)
 
 export default Actor
+

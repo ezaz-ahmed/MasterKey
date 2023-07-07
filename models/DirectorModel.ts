@@ -11,7 +11,9 @@ const directorSchema: Schema<IDirector> = new mongoose.Schema({
     type: String,
     required: true,
   },
-})
+},
+  { timestamps: true }
+)
 
 const Director: IDirectorModel = mongoose.model<IDirector, IDirectorModel>('Director', directorSchema)
 

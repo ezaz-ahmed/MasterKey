@@ -11,7 +11,9 @@ const producerSchema: Schema<IProducer> = new mongoose.Schema({
     type: String,
     required: true,
   },
-})
+},
+  { timestamps: true }
+)
 
 const Producer: IProducerModel = mongoose.model<IProducer, IProducerModel>('Producer', producerSchema)
 
