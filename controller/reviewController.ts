@@ -9,7 +9,7 @@ export const createReview = async (
   try {
     const { showId, rating, content } = req.body
 
-    const { userId } = req.user?._id
+    const userId = req.user?._id
 
     if (!showId || !rating || !content) {
       res.status(401).json({ message: 'Mandatory params are missing' })
@@ -17,12 +17,24 @@ export const createReview = async (
     }
 
     const newReview: IReview = new Review({
-      show: showId, rating: Number(rating), content, user: userId
+      show: showId, rating: Number(rating), content,
+      user: userId
     })
 
-    const savedReview: IReview = await newReview.save()
+    try {
 
-    res.status(201).json(savedReview)
+      console.log(newReview)
+
+      const savedReview: IReview = await newReview.save()
+
+      res.status(201).json(savedReview)
+    } catch (error) {
+      console.log(error)
+    }
+
+
+
+
   } catch (error) {
     res.status(500).json({ message: 'Server Error' })
   }

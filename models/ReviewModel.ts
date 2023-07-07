@@ -7,29 +7,30 @@ export interface IReview extends Document {
   user: IUser['_id']
   rating: number
   content: string
-  createdAt: Date
 }
 
 export interface IReviewModel extends Model<IReview> { }
 
 const reviewSchema: Schema<IReview> = new mongoose.Schema({
-  movie: {
-    type: mongoose.Schema.Types.ObjectId,
+  show: {
+    type: Schema.Types.ObjectId,
     ref: 'Show',
-    required: true,
+    required: true
   },
   user: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
+    required: true
   },
   rating: {
     type: Number,
     required: true,
+    min: 1,
+    max: 5
   },
   content: {
     type: String,
-    required: true,
+    required: true
   },
 },
   { timestamps: true }

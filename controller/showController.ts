@@ -165,12 +165,20 @@ export const getReviewsById = async (
   try {
     const showId: string = req.params.showId
 
-    const reviews: IReview[] = await Review.find({ movie: showId })
-      .populate('movie', 'title')
-      .populate('user', 'name')
+    try {
+      const reviews: IReview[] = await Review.find({ movie: showId }).select("rating content")
+        .populate('show', 'title')
+        .populate('user', 'name')
+
+      res.status(200).json(reviews)
+    } catch (error) {
+      console.log(error)
+    }
 
 
-    res.status(200).json(reviews)
+
+
+
   } catch (error) {
     res.status(500).json({ message: 'Server Error' })
   }
