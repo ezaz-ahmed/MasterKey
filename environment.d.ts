@@ -4,6 +4,7 @@ declare global {
       DATABASE: string
       NODE_ENV: 'development' | 'production'
       PORT?: string
+      JWT_SECRET: string
     }
   }
 }
